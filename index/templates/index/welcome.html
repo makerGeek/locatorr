@@ -1,7 +1,11 @@
 <h2>My Groups:</h2><br>
 <ul>
 {% for g in groups %}
-    <li>{{ g }}  <a href="./addmembers/{{ g.id }}">add members</a> </li>
+    <li>{{ g }}
+        {%  if g.owner.id == user_id %}
+        <a href="./addmembers/{{ g.id }}">add members</a>
+        {% endif %}
+    </li>
 {% endfor %}
 </ul>
 

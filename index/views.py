@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.template import loader
+from django.views.decorators.csrf import csrf_exempt
 from jsonpickle.tags import JSON_KEY
 
 from index.models import Group, GroupMember
@@ -19,11 +20,11 @@ import json
 
 
 
-
+@csrf_exempt
 def welcome(request):
     template =loader.get_template('index/welcome.html')
-    groups = Group.objects.filter(groupmemeber__member_id=request.user.pk)
-    context = { 'groups' : groups }
+    groups = Group.objects.filter(groupmember__member_id=request.user.pk)
+    context = { 'groups' : groups, 'user_id': request.user.pk }
     return HttpResponse(template.render(context, request))
 
 def createForm(request):
@@ -85,5 +86,5 @@ def addmember(request, group_id):
 
 
 def apiwelcome(request):
-    groups = Group.objects.filter(groupmemeber__member_id=request.user.pk)
+    groups = Group.objects.filter(groupmember__member_id=request.user.pk)
     return HttpResponse(json.dumps(json.loads(jsonpickle.encode(groups, unpicklable=True)), indent=2))
