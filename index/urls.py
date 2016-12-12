@@ -11,5 +11,6 @@ urlpatterns = [
     url(r'^created/', index.views.create, name='create'),
     url(r'^addmembers/(?P<group_id>[0-9]+)', index.views.addmembers, name='addMembers'),
     url(r'^addmember/(?P<group_id>[0-9]+)', index.views.addmember, name='addMember'),
+    url(r'^api/welcome$', views.apiwelcome, name='apiwelcome'),
     url(r'^$', views.welcome, name='welcome'),
 ]

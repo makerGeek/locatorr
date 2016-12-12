@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.contrib.auth.decorators import login_required
+
 
 import index
 from locatorr import views
@@ -22,6 +24,7 @@ from locatorr import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('registration.backends.simple.urls')),
-    url(r'^index/', include('index.urls')),
+    url(r'^index/',  include('index.urls')),
+    # url(r'^index/', include('index.urls')),
     url(r'^$', views.index),
 ]

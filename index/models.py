@@ -12,6 +12,8 @@ class Group(models.Model):
     def __str__(self):
         return self.name;
 
-class GroupMemeber(models.Model):
+class GroupMember(models.Model):
     groupId = models.ForeignKey(Group)
     member = models.ForeignKey(User)
+    def __str__(self):
+        return self.member.email;
